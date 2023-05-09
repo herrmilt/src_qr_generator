@@ -1,64 +1,69 @@
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.2/dist/jsQR.min.js"></script>
 
-<html>
-    <body class="container">
-        <table>
-            <tr>
-                <td><h2 id="response"></h2></td>
-            </tr>
-            <tr>
-                <td>
-                    <video id="qr-video" autoplay></video>
-                    <canvas id="qr-canvas" style="display:none;"></canvas>
-                </td>
-            </tr>
-        </table>
-
-
-
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body class="container">
+    <h2 id="response"></h2>
+    <video id="qr-video" autoplay></video>
+    <canvas id="qr-canvas" style="display: none"></canvas>
+  </body>
 </html>
 
 <script>
-  const video = document.getElementById('qr-video');
-  const canvasElement = document.getElementById('qr-canvas');
-  const canvas = canvasElement.getContext('2d');
+  const video = document.getElementById("qr-video");
+  const canvasElement = document.getElementById("qr-canvas");
+  const canvas = canvasElement.getContext("2d");
   let scanning = false;
 
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then((stream) => {
-    video.srcObject = stream;
-    video.setAttribute('playsinline', true); // Para que se reproduzca en iOS sin pantalla completa
-    video.play();
-    requestAnimationFrame(tick);
-  });
+  navigator.mediaDevices
+    .getUserMedia({ video: { facingMode: "environment" } })
+    .then((stream) => {
+      video.srcObject = stream;
+      video.setAttribute("playsinline", true); // Para que se reproduzca en iOS sin pantalla completa
+      video.play();
+      requestAnimationFrame(tick);
+    });
 
   function tick() {
     if (video.readyState === video.HAVE_ENOUGH_DATA) {
       canvasElement.height = video.videoHeight;
       canvasElement.width = video.videoWidth;
       canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
-      const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+      const imageData = canvas.getImageData(
+        0,
+        0,
+        canvasElement.width,
+        canvasElement.height
+      );
       const code = jsQR(imageData.data, imageData.width, imageData.height, {
-        inversionAttempts: 'dontInvert',
+        inversionAttempts: "dontInvert",
       });
       if (code) {
         if (!scanning) {
           scanning = true;
 
-          fetch('/api/qr', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ data: code.data })
-            }).then((response) => {
+          fetch("/api/qr", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ data: code.data }),
+          })
+            .then((response) => {
               return response.json();
-            }).then((data) => {
-              document.getElementById('response').textContent = data.data;
-            }).catch((error) => {
+            })
+            .then((data) => {
+              document.getElementById("response").textContent = data.data;
+            })
+            .catch((error) => {
               // Manejar errores
             });
-
 
           // Aquí se puede hacer la petición al servidor Flask para enviar los datos
         }
@@ -69,5 +74,3 @@
     }
   }
 </script>
-
-

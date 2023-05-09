@@ -2,6 +2,46 @@
 .container {
   max-width: 800px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+a h2 {
+  color: white;
+  position: relative;
+  border: #ccc solid 2px;
+  border: solid 1px darkslategray;
+  background-color: #008cba;
+  padding: 0.3em 1em;
+  border-radius: 0.3em;
+  cursor: pointer;
+}
+
+.bg1 {
+  border: solid red 1px;
+}
+.bg2 {
+  border: solid green 1px;
+}
+.bg3 {
+  border: solid orange 1px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row input {
+  flex-grow: 1;
+}
+.row label {
+  flex-shrink: 0;
+  min-width: 10em;
 }
 
 form {
@@ -12,7 +52,6 @@ form {
 
 label {
   font-size: 1.2em;
-  text-align: right;
 }
 
 input[type="text"],
@@ -25,7 +64,7 @@ input[type="number"] {
 }
 
 input[type="submit"] {
-  background-color: #008CBA;
+  background-color: #008cba;
   color: white;
   font-size: 1.2em;
   padding: 10px;
@@ -36,8 +75,12 @@ input[type="submit"] {
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 600px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
   .container {
-    padding: 20px;
+    padding: 2em;
   }
 
   form {
