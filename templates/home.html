@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
     <title>Generar y escanear QR</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
   <body>
-    <h1>Generar y escanear QR</h1>
-    <ul>
-      <li><a href="/gen_qr">Generar QR</a></li>
-      <li><a href="/capture_qr">Escanear QR</a></li>
-    </ul>
+    <div class="contianer">
+      <h1>Generar y escanear QR:</h1>
+      <a href="/gen_qr">
+        <h2>Generar QR</h2>
+      </a>
+      <a href="/capture_qr">
+        <h2>Escanear QR</h2>
+      </a>
+    </div>
   </body>
 </html>

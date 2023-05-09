@@ -1,42 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Formulario de registro</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario de ingreso de datos</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <form method="POST" action="{{ url_for('procesar_datos') }}">
-            <table>
-                <tr>
-                    <td colspan="2">
-                        <h1>Ingrese los datos</h1>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="nombre">Nombre:</label></td>
-                    <td><input type="text" id="nombre" name="nombre" maxlength="40" required></td>
-                </tr>
-                <tr>
-                    <td><label for="ci">Carnet de identidad:</label></td>
-                    <td><input type="number" id="ci" name="ci" minlength="11" maxlength="11" pattern="[0-9]{11}|[0-9]{6}" required></td>
-                </tr>
-                <tr>
-                    <td><label for="placa">Chapa:</label></td>
-                    <td><input type="text" id="placa" name="placa" pattern="[A-Za-z]{1}[0-9]{6}" required></td>
-                </tr>
-                <tr>
-                    <td><label for="telefono">Número de teléfono:</label></td>
-                    <td><input type="number" id="telefono" name="telefono" minlength="8" maxlength="8" pattern="[0-9]{8}" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value="Generar QR!"></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</body>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <form
+      class="container"
+      method="POST"
+      action="{{ url_for('procesar_datos') }}"
+      class="bg1"
+    >
+      <h1>Ingrese los datos</h1>
+      <div class="row">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" maxlength="40" required />
+      </div>
+      <div class="row">
+        <label for="ci">Carnet de identidad:</label>
+        <input
+          type="number"
+          id="ci"
+          name="ci"
+          minlength="11"
+          maxlength="11"
+          pattern="[0-9]{11}|[0-9]{6}"
+          required
+        />
+      </div>
+      <div class="row">
+        <label for="placa">Chapa:</label>
+        <input
+          type="text"
+          id="placa"
+          name="placa"
+          pattern="[A-Za-z]{1}[0-9]{6}"
+          required
+        />
+      </div>
+      <div class="row">
+        <label for="telefono">Número de teléfono:</label>
+        <input
+          type="number"
+          id="telefono"
+          name="telefono"
+          minlength="8"
+          maxlength="8"
+          pattern="[0-9]{8}"
+          required
+        />
+      </div>
+      <input type="submit" value="Generar QR!" />
+    </form>
+  </body>
 </html>
